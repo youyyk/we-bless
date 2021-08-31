@@ -11,10 +11,10 @@
 
     <title>@yield('title','We-Bless')</title>
 </head>
-<body>
+<body class="bg-green-50">
     @include('layouts.menu')
 
-    <div>
+    <div class="p-4">
         @yield('content')
     </div>
 

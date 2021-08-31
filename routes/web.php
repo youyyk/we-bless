@@ -17,35 +17,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/hello', function () {
-    return "Hello Laravel";
-});
+Route::get('/hello', [\App\Http\Controllers\HelloController::class, "index"]);
 
-Route::get('/hello/array', function () {
-    return ["Apple","Banana","Coconut"];
-});
+//Route::get('/hello/array', function () {
+//    return ["Apple","Banana","Coconut"];
+//});
 
-Route::get('/hello/array2', function () {
-    return [
-        'key'=> 'value',
-        'message' => 'Hello Laravel',
-        'success' => true,
-        'error' => false,
-    ];
-})->name('hello.array2');
-//////////////////////////////////////////////////////
-Route::get('/posts/{id?}', function ($id = null) {
-    if ($id === null)
-        return view('posts.index');
-    return "Post ID: " .$id;
-});
+Route::get('/hello/array', [\App\Http\Controllers\HelloController::class,"array"])
+    ->name('hello.array');
 
-Route::get('/about', function () {
-    return view('about',[
-        'name' => 'Your Name',
-        'info' => [
-            'address' => '<b>Kasetsart</b> University',
-            'email' => 'contact@ku.th'
-        ]
-    ]);
-});
+Route::get('/posts/{id?}', [\App\Http\Controllers\HelloController::class, "posts"]);
+
+Route::get('/about', [\App\Http\Controllers\HelloController::class, "about"]);

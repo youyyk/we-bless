@@ -13,14 +13,17 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
+        // table name -> plural
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->id(); // primary key, auto increment, unsigned big int, 'id'
+                        // no compound key
+            $table->string('name'); // varchar(255)
+            $table->string('email')->unique(); // unique key
+            $table->timestamp('email_verified_at')->nullable(); //datetime
+            $table->string('password'); // varchar(60)
             $table->rememberToken();
-            $table->timestamps();
+            $table->timestamps(); // 'created_at', 'updated_at'
+            $table->softDeletes();
         });
     }
 
