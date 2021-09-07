@@ -1,16 +1,18 @@
-<nav>
-    <ul>
-        <li>Menu 1</li>
-        <li>Menu 2</li>
-        <li>Menu 3</li>
-    </ul>
-</nav>
+{{--<nav>--}}
+{{--    <ul>--}}
+{{--        <li>Menu 1</li>--}}
+{{--        <li>Menu 2</li>--}}
+{{--        <li>Menu 3</li>--}}
+{{--    </ul>--}}
+{{--</nav>--}}
 <ul class="flex border-b">
     <li class="-mb-px mr-1">
-        <a class="bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-blue-700 font-semibold" href="#">Menu 1</a>
+        <a class="bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-blue-700 font-semibold"
+           href="{{route("apartments.index")}}">Index</a>
     </li>
     <li class="mr-1">
-        <a class="bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold" href="#">Menu 2</a>
+        <a class="bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold"
+           href="{{route("apartments.create")}}">Add</a>
     </li>
     <li class="mr-1">
         <a class="bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold" href="#">Menu 3</a>

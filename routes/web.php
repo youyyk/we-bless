@@ -29,3 +29,5 @@ Route::get('/hello/array', [\App\Http\Controllers\HelloController::class,"array"
 Route::get('/posts/{id?}', [\App\Http\Controllers\HelloController::class, "posts"]);
 
 Route::get('/about', [\App\Http\Controllers\HelloController::class, "about"]);
+
+Route::resource('apartments',\App\Http\Controllers\ApartmentController::class);
