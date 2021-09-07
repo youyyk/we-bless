@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Apartment;
+use App\Models\Room;
 use Illuminate\Http\Request;
 use function GuzzleHttp\Promise\all;
 use function PHPUnit\Framework\returnArgument;
@@ -48,6 +49,13 @@ class ApartmentController extends Controller
         return redirect()->route('apartments.index');
     }
 
+    public function createRoom($apartment_id){
+        $apartment = Apartment::findOrFail($apartment_id);
+        return view('apartments.create-room',[
+            'apartment' => $apartment,
+            'room_types' => Room::$room_types
+        ]);
+    }
     /**
      * Display the specified resource.
      *

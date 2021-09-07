@@ -24,4 +24,20 @@
             </button>
         </div>
     </form>
+
+    <div class="mt-4">
+        <h2>DANGER ZONE</h2>
+        <form action="{{route('apartments.destroy',['apartment' => $apartment->id])}}" method="POST">
+            @method('DELETE')
+            @csrf
+            <p>การลบ ไม่สามารถกู้คืนได้</p>
+            <div>
+                <label for="destroy">ใส่ชื่ออพาร์จเมนต์เพื่อยืนยันการลบ</label>
+                <input type="text" name="name">
+            </div>
+            <button type="submit" class="border-2 px-4 py-2 bg-red-500 hover:bg-red-200">
+                ลบ
+            </button>
+        </form>
+    </div>
 @endsection

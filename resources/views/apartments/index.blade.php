@@ -7,7 +7,7 @@
 
     <div class="my-6">
         <a class="border-2 2xl:bg-green-500 px-4 py-1"
-            href="{{route('apartments.create')}}}">
+            href="{{route('apartments.create')}}">
             + เพิ่มอพาร์ตเมนต์ใหม่
         </a>
     </div>
@@ -29,7 +29,7 @@
                         </a>
                     </td>
                     <td class="border-2">{{$apartment->num_floor}}</td>
-                    <td class="border-2">{{$apartment->num_room}}</td>
+                    <td class="border-2">{{$apartment->rooms->count()}}/{{$apartment->num_room}}</td>
                 </tr>
             @endforeach
         </tbody>
