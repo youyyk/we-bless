@@ -32,5 +32,7 @@ Route::get('/about', [\App\Http\Controllers\HelloController::class, "about"]);
 
 Route::get('/apartments/{apartment}/rooms/create', [\App\Http\Controllers\ApartmentController::class, "createRoom"])
     -> name('apartment.rooms.create');
+
 Route::resource('apartments',\App\Http\Controllers\ApartmentController::class);
 Route::resource('rooms',\App\Http\Controllers\RoomController::class);
+Route::resource('tasks',\App\Http\Controllers\TaskController::class);

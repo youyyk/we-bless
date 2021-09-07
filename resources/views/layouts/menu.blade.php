@@ -15,10 +15,12 @@
            href="{{route("apartments.create")}}">Add AP</a>
     </li>
     <li class="mr-1">
-        <a class="bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold" href="#">ALL Task</a>
+        <a class="bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold"
+           href="{{route("tasks.index")}}">ALL Task</a>
     </li>
     <li class="mr-1">
-        <a class="bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold" href="#">Add Task</a>
+        <a class="bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold"
+           href="{{route('tasks.create')}}">Add Task</a>
     </li>
 </ul>
 
