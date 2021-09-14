@@ -18,9 +18,15 @@
             <input type="date" class="border-2" name="due_date" autocomplete="off" value="{{$task->due_date->format('Y-m-d')}}">
         </div>
 
+        <div class="mb-4">
+            <label for="tags">Tags ของงาน (คั่นแต่ละ Tag ด้วย ,)</label>
+            <input type="text" class="border p-2 w-full"
+                   name="tags" autocomplete="off" value="{{$task->tag_names}}">
+        </div>
+
         <div>
             <button type="submit" class="border-2 px-4 py-2 bg-blue-300 hover:bg-blue-200">
-                แก้ไข
+                Confirm Edit
             </button>
         </div>
     </form>

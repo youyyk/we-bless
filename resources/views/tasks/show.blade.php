@@ -8,7 +8,15 @@
         Information for this task
     </h1>
     <hr>
-    <table class="table border-2 border-gray-500 mt-14">
+    <div class="mt-4">
+        @foreach($task->tags as $tag)
+            <a class="inline-block ml-2 p-2 bg-gray-400 rounded-2xl hover:bg-gray-200"
+               href="{{route('tags.slug',['slug'=>$tag->name])}}">
+                {{$tag->name}}
+            </a>
+        @endforeach
+    </div>
+    <table class="table border-2 border-gray-500 mt-12">
         <thead>
         <tr>
             <th class="border-2">Title</th>

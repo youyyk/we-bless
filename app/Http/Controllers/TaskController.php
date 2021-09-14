@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use App\Models\Task;
 use Illuminate\Http\Request;
 
@@ -43,9 +44,26 @@ class TaskController extends Controller
         $task->detail = $request->input('detail');
         $task->due_date = $request->input('due_date');
         $task->save();
+
+        $tagsWithComma = trim($request->input('tags'));
+        $this->updateTagNames($task, $tagsWithComma);
         return redirect()->route('tasks.index');
     }
 
+    private function updateTagNames($task, $tagsWithComma){
+        if ($tagsWithComma) {
+            $tag_ids = [];
+            $tag_names = explode(",",$tagsWithComma);
+            foreach ($tag_names as $name){
+                $name = trim($name);
+                if ($name){
+                    $tag = Tag::firstOrCreate(['name'=>$name]);
+                    array_push($tag_ids,$tag->id);
+                }
+            }
+            $task->tags()->sync($tag_ids);
+        }
+    }
     /**
      * Display the specified resource.
      *
@@ -85,6 +103,9 @@ class TaskController extends Controller
         $task->detail = $request->input('detail');
         $task->due_date = $request->input('due_date');
         $task->save();
+
+        $tagsWithComma = trim($request->input('tags'));
+        $this->updateTagNames($task, $tagsWithComma);
         return redirect()->route('tasks.show',['task'=>$task]);
     }
 

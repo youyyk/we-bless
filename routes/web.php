@@ -36,3 +36,6 @@ Route::get('/apartments/{apartment}/rooms/create', [\App\Http\Controllers\Apartm
 Route::resource('apartments',\App\Http\Controllers\ApartmentController::class);
 Route::resource('rooms',\App\Http\Controllers\RoomController::class);
 Route::resource('tasks',\App\Http\Controllers\TaskController::class);
+Route::resource('tags',\App\Http\Controllers\TagController::class);
+Route::get('tag/{slug}', [\App\Http\Controllers\TagController::class, 'showBySlug'])
+    -> name('tags.slug');

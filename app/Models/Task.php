@@ -14,7 +14,7 @@ class Task extends Model
 // https://laravel.com/docs/8.x/eloquent-mutators#date-casting
     protected $dates = ['due_date'];
 //https://laravel.com/docs/8.x/eloquent-serialization#appending-values-to-json
-    protected $appends = ['is_past', 'is_urgent'];
+    protected $appends = ['is_past', 'is_urgent', 'tag_names'];
     private const DATE_FOR_URGENT = 3;
 /*----------------------------------------------------------------------------*/
     public function isPast(): bool
@@ -63,5 +63,13 @@ class Task extends Model
     {
         $today = Carbon::today()->format('Y-m-d');
         return $query->where('due_date', '>=', $today);
+    }
+
+    public function tags(){
+        return $this->belongsToMany(Tag::class)->withTimestamps();
+    }
+
+    public function getTagNamesAttribute() {
+        return implode(", ",$this->tags->pluck('name')->all());
     }
 }

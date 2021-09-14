@@ -22,6 +22,11 @@
         <a class="bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold"
            href="{{route('tasks.create')}}">Add Task</a>
     </li>
+    <li class="mr-1">
+        <a class="bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold
+                    @if(\Request::routeIs('tags.*')) bg-gray-300 @endif"
+           href="{{route('tags.index')}}">ALL Tag</a>
+    </li>
 </ul>
 
 {{--<nav class="relative flex flex-wrap items-center justify-between px-2 py-3 bg-teal-500 mb-3">--}}
