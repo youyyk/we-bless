@@ -7,15 +7,33 @@
         @method('PUT')
         <div class="mb-4">
             <label for="title">title</label>
-            <input type="text" class="border-2" name="title" autocomplete="off" value="{{$task->title}}">
+            <input type="text" class="border-2
+                               @error('title') border-red-400 bg-red-200 @enderror"
+                   name="title" autocomplete="off"
+                   value="{{old('title',$task->title)}}">
+            @error('title')
+            <p class="text-red-500">{{$message}}</p>
+            @enderror
         </div>
         <div class="mb-4">
             <label for="detail">detail</label>
-            <input type="text" class="border-2" name="detail" autocomplete="off" value="{{$task->detail}}">
+            <input type="text" class="border-2
+                               @error('detail') border-red-400 bg-red-200 @enderror"
+                   name="detail" autocomplete="off"
+                   value="{{old('detail',$task->detail)}}">
+            @error('detail')
+            <p class="text-red-500">{{$message}}</p>
+            @enderror
         </div>
         <div class="mb-4">
             <label for="due_date">Due-Date</label>
-            <input type="date" class="border-2" name="due_date" autocomplete="off" value="{{$task->due_date->format('Y-m-d')}}">
+            <input type="date" class="border-2
+                               @error('due_date') border-red-400 bg-red-200 @enderror"
+                   name="due_date" autocomplete="off"
+                   value="{{old('due_date',$task->due_date->format('Y-m-d'))}}">
+            @error('due_date')
+            <p class="text-red-500">{{$message}}</p>
+            @enderror
         </div>
 
         <div class="mb-4">

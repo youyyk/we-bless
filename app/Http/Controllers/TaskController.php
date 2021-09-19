@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TaskRequest;
 use App\Models\Tag;
 use App\Models\Task;
 use Illuminate\Http\Request;
@@ -37,7 +38,7 @@ class TaskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(TaskRequest $request)
     {
         $task = new Task();
         $task->title = $request->input('title');
@@ -97,7 +98,7 @@ class TaskController extends Controller
      * @param  \App\Models\Task  $task
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Task $task)
+    public function update(TaskRequest $request, Task $task)
     {
         $task->title = $request->input('title');
         $task->detail = $request->input('detail');
