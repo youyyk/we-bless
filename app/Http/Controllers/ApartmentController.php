@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ApartmentRequest;
 use App\Models\Apartment;
 use App\Models\Room;
+use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use function GuzzleHttp\Promise\all;
 use function PHPUnit\Framework\returnArgument;
 
@@ -18,7 +20,13 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        $apartments = Apartment::get();
+        if (Auth::check()){
+            if (Auth::user()->isRole('OFFICER')){
+                $apartments = Apartment::whereUserId(Auth::id())->get();
+            }
+        }else{
+            $apartments = Apartment::get();
+        }
         return view('apartments.index',[
             'apartments' => $apartments
         ]);
@@ -31,6 +39,7 @@ class ApartmentController extends Controller
      */
     public function create()
     {
+        $this->authorize('create',Apartment::class);
         return view('apartments.create');
     }
 
@@ -42,6 +51,7 @@ class ApartmentController extends Controller
      */
     public function store(ApartmentRequest $request)
     {
+        $this->authorize('create',Apartment::class);
         $apartment = new Apartment();
         $apartment->name = $request->input('name');
         $apartment->num_floor = $request->input('num_floor');
@@ -52,6 +62,7 @@ class ApartmentController extends Controller
 
     public function createRoom($apartment_id){
         $apartment = Apartment::findOrFail($apartment_id);
+        $this->authorize('update',$apartment);
         return view('apartments.create-room',[
             'apartment' => $apartment,
             'room_types' => Room::$room_types
@@ -66,6 +77,7 @@ class ApartmentController extends Controller
     public function show($id)
     {
         $apartment = Apartment::findOrFail($id); // or fins($id)
+        $this->authorize('view',$apartment);
         return view('apartments.show',[
             'apartment' => $apartment
         ]);
@@ -79,8 +91,8 @@ class ApartmentController extends Controller
      */
     public function edit($id)
     {
-
         $apartment = Apartment::findOrFail($id);
+        $this->authorize('update',$apartment);
         return view('apartments.edit',[
             'apartment' => $apartment
         ]);
@@ -96,6 +108,7 @@ class ApartmentController extends Controller
     public function update(ApartmentRequest $request, $id)
     {
         $apartment = Apartment::findOrFail($id);
+        $this->authorize('update',$apartment);
         $apartment->name = $request->input('name');
         $apartment->num_floor = $request->input('num_floor');
         $apartment->num_room = $request->input('num_room');
@@ -112,6 +125,7 @@ class ApartmentController extends Controller
     public function destroy(Request $request,$id)
     {
         $apartment = Apartment::findOrFail($id);
+        $this->authorize('delete',$apartment);
         if ($apartment->name === $request->input('name')) {
             $apartment->delete();
             return redirect()->route('apartments.index');

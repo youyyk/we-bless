@@ -14,16 +14,24 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+//    return view('welcome');
+    return redirect()->route('apartments.index');
 });
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
+
+/*----- Old -----*/
 Route::get('/hello', [\App\Http\Controllers\HelloController::class, "index"]);
 
 //Route::get('/hello/array', function () {
 //    return ["Apple","Banana","Coconut"];
 //});
 
-Route::get('/hello/array', [\App\Http\Controllers\HelloController::class,"array"])
+Route::get('/hello/array', [\App\Http\Controllers\HelloController::class, "array"])
     ->name('hello.array');
 
 Route::get('/posts/{id?}', [\App\Http\Controllers\HelloController::class, "posts"]);
@@ -31,11 +39,13 @@ Route::get('/posts/{id?}', [\App\Http\Controllers\HelloController::class, "posts
 Route::get('/about', [\App\Http\Controllers\HelloController::class, "about"]);
 
 Route::get('/apartments/{apartment}/rooms/create', [\App\Http\Controllers\ApartmentController::class, "createRoom"])
-    -> name('apartment.rooms.create');
+    ->name('apartment.rooms.create');
 
-Route::resource('apartments',\App\Http\Controllers\ApartmentController::class);
-Route::resource('rooms',\App\Http\Controllers\RoomController::class);
-Route::resource('tasks',\App\Http\Controllers\TaskController::class);
-Route::resource('tags',\App\Http\Controllers\TagController::class);
+Route::resource('apartments', \App\Http\Controllers\ApartmentController::class);
+Route::resource('rooms', \App\Http\Controllers\RoomController::class);
+Route::resource('tasks', \App\Http\Controllers\TaskController::class)
+    ->middleware('auth');
+Route::resource('tags', \App\Http\Controllers\TagController::class);
 Route::get('tag/{slug}', [\App\Http\Controllers\TagController::class, 'showBySlug'])
-    -> name('tags.slug');
+    ->name('tags.slug');
+

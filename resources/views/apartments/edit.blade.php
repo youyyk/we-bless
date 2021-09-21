@@ -37,6 +37,7 @@
         </div>
     </form>
 
+    @can('delete', $apartment)
     <div class="mt-4">
         <h2>DANGER ZONE</h2>
         <form action="{{route('apartments.destroy',['apartment' => $apartment->id])}}" method="POST">
@@ -52,4 +53,5 @@
             </button>
         </form>
     </div>
+    @endcan
 @endsection

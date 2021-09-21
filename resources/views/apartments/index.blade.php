@@ -5,12 +5,14 @@
         รายการอพาร์ตเมนต์
     </h1>
 
-    <div class="my-6">
-        <a class="border-2 2xl:bg-green-500 px-4 py-1"
-            href="{{route('apartments.create')}}">
-            + เพิ่มอพาร์ตเมนต์ใหม่
-        </a>
-    </div>
+    @can('create',\App\Models\Apartment::class)
+        <div class="my-6">
+            <a class="border-2 2xl:bg-green-500 px-4 py-1"
+                href="{{route('apartments.create')}}">
+                + เพิ่มอพาร์ตเมนต์ใหม่
+            </a>
+        </div>
+    @endcan
 
     <table class="table border-2 border-gray-500">
         <thead>

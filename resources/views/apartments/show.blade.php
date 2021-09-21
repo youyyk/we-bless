@@ -9,23 +9,25 @@
         {{$apartment->rooms->count()}}/{{$apartment->num_room}} ห้อง
 </div>
 <hr>
-<div class="my-4">
-    <a class="border-2 bg-yellow-500 px-4 py-2"
-        href="{{route('apartments.edit',['apartment' => $apartment->id])}}">
-        แก้ไข
-    </a>
-</div>
-
+    @can('update',$apartment)
+    <div class="my-4">
+        <a class="border-2 bg-yellow-500 px-4 py-2"
+            href="{{route('apartments.edit',['apartment' => $apartment->id])}}">
+            แก้ไข
+        </a>
+    </div>
+    @endcan
 <div class="mt-4">
     <h2 class="text-3xl"> รายชื่อห้องในอพาร์ตเมนต์</h2>
 
+    @can('update',$apartment)
     <div class="my-2">
         <a  class="px-4 py-2 bg-yellow-500 hover:bg-yellow-200"
             href="{{route('apartment.rooms.create',['apartment' => $apartment->id])}}">
             เพิ่มห้องใหม่
         </a>
     </div>
-
+    @endcan
     <ul>
         @foreach($apartment->rooms->sortBy('floor') as $room)
             <li>

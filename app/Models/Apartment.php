@@ -13,4 +13,8 @@ class Apartment extends Model
     public function rooms(){
         return $this->hasMany(Room::class);
     }
+
+    public function officer(){
+        return $this->belongsTo(User::class,'user_id');
+    }
 }

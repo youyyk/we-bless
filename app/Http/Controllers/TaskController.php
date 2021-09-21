@@ -6,6 +6,7 @@ use App\Http\Requests\TaskRequest;
 use App\Models\Tag;
 use App\Models\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -16,7 +17,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::get();
+        $tasks = Auth::user()->tasks()->get();
         return view('tasks.index',[
            'tasks' => $tasks
         ]);
@@ -44,6 +45,9 @@ class TaskController extends Controller
         $task->title = $request->input('title');
         $task->detail = $request->input('detail');
         $task->due_date = $request->input('due_date');
+        $task->user_id = Auth::user()->id;
+//        $task->user_id = Auth::id();
+//        $task->user_id = $request->user()->id;
         $task->save();
 
         $tagsWithComma = trim($request->input('tags'));
