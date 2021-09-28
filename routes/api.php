@@ -19,3 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('apartments',\App\Http\Controllers\Api\ApartmentController::class);
+Route::apiResource('tasks',\App\Http\Controllers\Api\TaskController::class);

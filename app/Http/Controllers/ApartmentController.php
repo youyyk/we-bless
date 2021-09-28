@@ -24,14 +24,18 @@ class ApartmentController extends Controller
             if (Auth::user()->isRole('OFFICER')){
                 $apartments = Apartment::whereUserId(Auth::id())->get();
             }
-        }else{
+            if (Auth::user()->isAdmin()){
+                $apartments = Apartment::get();
+            }
+        }
+        else {
             $apartments = Apartment::get();
         }
+
         return view('apartments.index',[
             'apartments' => $apartments
         ]);
     }
-
     /**
      * Show the form for creating a new resource.
      *

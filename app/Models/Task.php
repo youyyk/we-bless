@@ -72,4 +72,8 @@ class Task extends Model
     public function getTagNamesAttribute() {
         return implode(", ",$this->tags->pluck('name')->all());
     }
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 }
