@@ -7,18 +7,24 @@ use App\Http\Resources\TaskCollection;
 use App\Http\Resources\TaskResource;
 use App\Models\Task;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class TaskController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth:api');
+    }
     /**
      * Display a listing of the resource.
      *
-     * @return TaskCollection
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()
     {
+        $user = JWTAuth::user();
+        $tasks = $user->tasks()->paginate(5);
 //        $tasks = Task::get();
-        $tasks = Task::paginate(5);
+//        $tasks = Task::paginate(5);
         return TaskResource::collection($tasks);
 //        return new TaskCollection($tasks);
     }
@@ -31,14 +37,21 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $task = new Task();
+        $user = JWTAuth::user();
+        $task->title = $request->input('title');
+        $task->detail = $request->input('detail');
+        $task->due_date = $request->input('due_date');
+        $task->user_id = $user->id;
+        $task->save();
+        return new TaskResource($task);
     }
 
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\Task  $task
-     * @return TaskResource
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show(Task $task)
     {
