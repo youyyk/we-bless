@@ -49,3 +49,9 @@ Route::resource('tags', \App\Http\Controllers\TagController::class);
 Route::get('tag/{slug}', [\App\Http\Controllers\TagController::class, 'showBySlug'])
     ->name('tags.slug');
 
+Route::resource('images',\App\Http\Controllers\ImageController::class);
+
+Route::get('/google/redirect', [\App\Http\Controllers\GoogleAuthController::class,'redirect'])
+->name('google.redirect');
+Route::get('/google/callback', [\App\Http\Controllers\GoogleAuthController::class,'callback']);
+

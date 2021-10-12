@@ -53,6 +53,12 @@
                     Register
                 </a>
             </li>
+            <li class="mr-1">
+                <a href="{{route('google.redirect')}}" class="bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold
+                            @if(\Request::routeIs('tags.*')) bg-gray-300 @endif">
+                    login Google
+                </a>
+            </li>
         @endif
     </ul>
 </div>

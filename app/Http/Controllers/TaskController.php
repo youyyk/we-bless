@@ -7,6 +7,7 @@ use App\Models\Tag;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Phattarachai\LineNotify\Facade\Line;
 
 class TaskController extends Controller
 {
@@ -49,6 +50,11 @@ class TaskController extends Controller
 //        $task->user_id = Auth::id();
 //        $task->user_id = $request->user()->id;
         $task->save();
+
+        Line::send("\n มีการเพิ่ม Tasks โดย {$task->user_id}\n
+                    Title: {$task->title}\n
+                    Detail: {$task->detail}\n
+                    Due-Date: {$task->due_date}");
 
         $tagsWithComma = trim($request->input('tags'));
         $this->updateTagNames($task, $tagsWithComma);
